@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://daeera.neocities.org/signs/style.css">
+    <title>registro</title>
+</head>
+
+<body>
+    <div class="container ">
+        <div class="row justify-content-center mt-5">
+                <div class="card col-5 offset-1" id="form-S">
+                        <form id="formulario" class="needs-validation" action="http://localhost/conexion_php/index.php" method="POST" novalidate>
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <h2>¡Un gusto! Ingresa tus datos</h2>
+                                    <img src="https://cdn.discordapp.com/attachments/1119139672925405256/1199604525397463040/mochi-corporate-employees-celebrating-successful-teamwork.png?ex=65c325c6&is=65b0b0c6&hm=7c85f23c4177360978a46dda0f338c14566c6171887a978153fd9f968936eaee&" id="img_log">
+                                </div>
+                            </div><!--img-->
+                            <div class="row justify-content-center">
+                                <div class="col-10 ">
+                                    <label for="usuario" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="usuarioid" name="usuario" required >
+                                <div class="invalid-feedback">
+                                </div><!--col-12-->
+                            </div><!--row name-->
+                            </div><!--row-->
+                            <br>
+                            <div class="row justify-content-center">
+                                <div class="col-10">
+                                    <label for="contrasena" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="contrasenaid" name="contrasena" required >
+                                    <div class="invalid-feedback">
+                                        ingresa tu contraseña.
+                                    </div>
+                                </div><!--col-10-->
+                            </div><!--row-->
+                            <br>
+                            <div class="row justify-content-center">
+                                <div class="col-10">
+                                    <label for="contrasena2" class="form-label">Confirmar contraseña</label>
+                                    <input type="password" class="form-control" id="contrasenaid2" name="contrasena2" required >
+                                    <div class="invalid-feedback">
+                                        Confirma tu contraseña.
+                                    </div>
+                                </div><!--col-10-->
+                            </div><!--row-->
+                            <div class="row justify-content-center">
+                                <div class="col-5 offset-2">
+                                    <button type="submit"  id="botonsubmit">Ingresar</button>
+                                    <div class="offset-1 col-6 mb-3">
+                                     
+                                    </div>
+                                </div><!--button-->
+                            </div><!--row button-->
+   <p>¿Ya tienes cuenta? <a href="login.html"><strong>Inicia sesión</strong></a></p>
+                        </form>
+                </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+    
+        var usuario = document.getElementById("usuarioid");
+        var contrasena = document.getElementById("contrasenaid");
+        var contrasena2 = document.getElementById("contrasenaid2");
+        var boton = document.getElementById("botonsubmit");
+
+        boton.addEventListener("click", (e) => {
+        if (contrasena.value !== contrasena2.value) {
+            alert("Las contraseñas no coinciden");
+            e.preventDefault();
+        } else {
+            var mensaje = {
+            "usuario": usuario.value,
+            "contrasena": contrasena.value,
+            "contrasena2": contrasena2.value,
+            };
+
+            var jsonString = JSON.stringify(mensaje);
+
+            fetch("http://localhost/conexion_php/index.php", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json; charset=utf-8",
+            },
+            body: jsonString,
+            })
+            .then((respuesta) => {
+                return respuesta.json();
+            })
+            .then((info) => {
+                console.log(info);
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+        }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://daeera.neocities.org/signs/style.css">
+    <title>Inicio</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card col-5 offset-1" id="form-S">
+                    <form id="formulario" class="needs-validation mb-3" action="http://localhost/conexion_php/login.php" method="POST" novalidate>
+                        <div class="row justify-content-center">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <h2>¡Bienvenido!</h2>
+                                </div><!--col-11-->
+                            </div><!--row-->
+                            <img src="https://cdn.discordapp.com/attachments/1119139672925405256/1199594728136650772/bloom-blue-user-contact-icon.gif?ex=65c31ca6&is=65b0a7a6&hm=161a05852f15bd4a7166dc04a5f826af3acbc4bf9c9604e78971c9c8da7545e0&" id="img_log">
+                            
+                            <div class=" row justify-content-center">
+                                <div class="col-10">
+                                    <label for="txtusuarioid" class="form-label">Usuario</i></label>
+                                <input required type="email" class="form-control" id="txtusuarioid" name="txtusuarioname" >
+                                </div><!--col-11-->
+                            </div><!--name-->
+                            <div class="row justify-content-center">
+                                <div class="col-10">
+                                    <label for="pswid" class="form-label">Contraseña</label>
+                                <input required type="password" name="pswname" id="pswid" class="form-control" >
+                                </div><!--col-10-->
+                            </div><!--row-->
+                            <div class="row justify-content-center">
+                                <div class="col-5 offset-2">
+                                     <button id="botonsubmit" type="submit" name="login" class="btn btn-secondary">Guardar</button>
+                                </div><!--col-2-->
+                            </div><!--row button-->
+                            <br>
+                            <br>
+                            <div class="offset-1 col-6 mb-3">
+                                <p>¿No tienes cuenta? <a href="registro.html"><strong>Regístrate </strong></a></p>
+                            </div>
+                            <br>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+            </div><!--card-->
+        </div><!--row--> 
+        
+    </div><!--container-->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    
+    var usuario = document.getElementById("usuarioid");
+    var contrasena = document.getElementById("contrasenaid");
+    var boton = document.getElementById("botonsubmit");
+    
+    boton.addEventListener("click",(e) =>{
+        alert(`info:
+        ${usuario.value}
+        ${contrasena.value}`);
+    
+        var mensaje={
+            "usuario": usuario.value,
+            "contrasena": contrasena.value 
+        };
+    
+        var jsonString=JSON.stringify(mensaje);
+    
+    
+        fetch("http://localhost/conexion_php/login.php",{
+            method:"POST",
+            headers:{
+                "content-type":"application/json; charset=utf-8"
+            },
+            body:jsonString 
+        })
+        .then((respuesta)=>{return respuesta.json()})
+        .then((info)=>{console.log(info)})
+        .catch((e)=>{console.error(e);});
+    })
+</script>
+</html>
